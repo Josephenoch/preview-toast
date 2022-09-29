@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC} from 'react'
 import { IIcons , IAlertProps} from './interfaces'
 import { Error, Done, Dangerous, Info }from '@mui/icons-material';
 
@@ -11,7 +11,6 @@ const Alert:FC<IAlertProps> = ({message, type}) => {
     warn: <Error/>,
     info: <Info/>
   }
-
   return (
     <div>
         {icons[type]}
