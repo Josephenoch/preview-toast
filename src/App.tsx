@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
+import AlertContainer from './components/AlertContainer';
 
 function App() {
   return (
-    <h1 className="bg-red-500 w-screen">Hi</h1>
+    <AlertContainer/>
   );
 }
 
