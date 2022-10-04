@@ -1,20 +1,29 @@
-import React, { FC, useEffect, memo} from 'react'
-import { IIcons , IDetails} from './interfaces'
-import { Error, Done, Dangerous, Info }from '@mui/icons-material';
+import React, { FC, useEffect, memo, ReactElement} from 'react'
+import {IDetails} from './interfaces'
 
+import styles from "./styles/alert.module.scss"
 
 interface IAlertProps extends IDetails {
-  destroy: (id:string)=>void,
+  destroy: (id:string)=>void
   id:string
+  icon: ReactElement
+  color: string
+  bgColor: string
 }
 
-const Alert:FC<IAlertProps> = ({id, duration, destroy, message, type}) => {
-  const icons:IIcons = {
-    success: <Done/>,
-    error: <Dangerous/>,
-    warn: <Error/>,
-    info: <Info/>
-  }
+const Alert:FC<IAlertProps> = ({
+  id,
+  icon,
+  type,
+  duration,
+  message,
+  destroy,
+  color,
+  bgColor
+
+}) => {
+  
+  
   useEffect(()=>{
     const myTimeOut = setTimeout(()=>destroy(id), duration)
 
@@ -22,9 +31,15 @@ const Alert:FC<IAlertProps> = ({id, duration, destroy, message, type}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   return (
-    <div>
-        {icons[type]}
-        {message}
+    <div
+      id={styles.container}
+      style={{
+        backgroundColor: bgColor,
+        border: `${color} solid 0.5px`
+      }}
+    >
+        {icon}
+        <span id={styles.text}>{message}</span>
     </div>
   )
 }

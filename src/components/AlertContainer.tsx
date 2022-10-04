@@ -1,17 +1,28 @@
-import React,{useCallback, useEffect, useState} from 'react'
-import Alert from './Alert'
-import { IDetails } from './interfaces'
+// module imports
+import React,{FC, useCallback, useEffect, useState} from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
+// local component/data imports
+import Alert from './Alert'
+
+// interfaces and types import
+import { IIcons , IDetails, IColors} from './interfaces'
+import { defaultIcons, defaultBGColors, defaultColors } from './data';
+
+import styles from "./styles/alert-container.module.scss"
 
 interface IDetailsWithID extends IDetails {
   id: string
 }
 
+interface IProps{
+  icons?: IIcons
+  colors?: IColors
+  bgColors?: IColors
+}
 
-const AlertContainer = () => {
+const AlertContainer:FC<IProps> = ({icons=defaultIcons, bgColors=defaultBGColors, colors=defaultColors}) => {
   const [alerts, setAlerts] = useState<IDetailsWithID[]>([])
-
 
   const handleAlertEvent = useCallback(
     (event:CustomEvent<IDetailsWithID>)=>{
@@ -20,7 +31,6 @@ const AlertContainer = () => {
         const id = uuidv4()
         return [...prevState, {...detail, id}]
       })
-      console.log("complete")
     },[])
 
   const destroy = useCallback(
@@ -41,16 +51,19 @@ const AlertContainer = () => {
   },[])
 
   return (
-    <div className="absolute right-4 top-10 space-y-4">
+    <div id={styles.container}>
       {
         alerts.map(alertItem=>
           <Alert 
-            key={alertItem.id}
-            duration={alertItem.duration} 
-            id={alertItem.id} 
-            destroy={destroy} 
-            type={alertItem.type} 
-            message={alertItem.message}
+            key = {alertItem.id}
+            duration = {alertItem.duration} 
+            id = {alertItem.id} 
+            destroy = {destroy} 
+            type= { alertItem.type} 
+            message = {alertItem.message}
+            icon = {icons[alertItem.type]}
+            color =   {colors[alertItem.type]}
+            bgColor = {bgColors[alertItem.type]}
           />)
       }
       
@@ -59,3 +72,5 @@ const AlertContainer = () => {
 }
 
 export default AlertContainer
+
+

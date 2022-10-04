@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import styles from './app.module.scss';
 import { CreateAlert } from './components';
 import AlertContainer from './components/AlertContainer';
 
@@ -38,7 +38,7 @@ function App() {
     })
   }
   return (
-    <div className="flex justify-center items-center w-screen h-screen flex-col space-y-2">
+    <div id={styles.parentContainer}>
       <AlertContainer/>
       <button onClick={handleInfoClick}>
         Click Me For more Info
