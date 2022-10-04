@@ -1,16 +1,26 @@
-import React, { FC} from 'react'
-import { IIcons , IAlertProps} from './interfaces'
+import React, { FC, useEffect, memo} from 'react'
+import { IIcons , IDetails} from './interfaces'
 import { Error, Done, Dangerous, Info }from '@mui/icons-material';
 
 
+interface IAlertProps extends IDetails {
+  destroy: (id:string)=>void,
+  id:string
+}
 
-const Alert:FC<IAlertProps> = ({message, type}) => {
+const Alert:FC<IAlertProps> = ({id, duration, destroy, message, type}) => {
   const icons:IIcons = {
     success: <Done/>,
     error: <Dangerous/>,
     warn: <Error/>,
     info: <Info/>
   }
+  useEffect(()=>{
+    const myTimeOut = setTimeout(()=>destroy(id), duration)
+
+    return () => clearTimeout(myTimeOut)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   return (
     <div>
         {icons[type]}
@@ -19,4 +29,4 @@ const Alert:FC<IAlertProps> = ({message, type}) => {
   )
 }
 
-export default Alert
+export default memo(Alert)

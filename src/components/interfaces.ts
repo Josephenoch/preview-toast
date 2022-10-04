@@ -7,11 +7,9 @@ export interface IIcons {
     warn: TIcon
 }
 
-export interface IAlertProps {
+export interface IDetails {
     type: "success" | "error" | "warn" | "info",
     message: string,
-  }
-
-export interface IDetails extends IAlertProps{
     duration: number 
+
 }

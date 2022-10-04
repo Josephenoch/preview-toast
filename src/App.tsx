@@ -6,31 +6,35 @@ import AlertContainer from './components/AlertContainer';
 function App() {
 
   const handleInfoClick = () =>{
+    
     CreateAlert({
       message:"Info Button Clicked",
       type:"info",
-      duration: 1000
+      duration: 2000,
     })
   }
   const handleSuccessClick = () =>{
     CreateAlert({
       message:"success Button Clicked",
       type:"success",
-      duration: 1000
+      duration: 1000,
+
     })
   } 
   const handleErrorClick = () =>{
     CreateAlert({
       message:"Error Button Clicked",
       type:"error",
-      duration: 1000
+      duration: 1000,
+
     })
   }
   const handleWarnClick = () =>{
     CreateAlert({
       message:"Warning Button Clicked",
       type:"warn",
-      duration: 1000
+      duration: 1000,
+
     })
   }
   return (
