@@ -1,12 +1,10 @@
 import React from 'react';
 import styles from './app.module.scss';
-import { CreateAlert } from './components';
-import AlertContainer from './components/AlertContainer';
+import { CreateAlert, AlertContainer } from "@joeenoch/re-toast"
 
 function App() {
 
   const handleInfoClick = () =>{
-    
     CreateAlert({
       message:"Info Button Clicked",
       type:"info",
